@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { AdminReadingsWindowForm } from "@/components/AdminReadingsWindowForm";
 import { InnerPageSurface } from "@/components/InnerPageSurface";
 import { requireAdmin } from "@/lib/require-admin";
 import {
   getCalendarDayInTimeZone,
   isDefaultReadingsWindowOpen,
-  parseReadingsOverrideCookie,
-  readingsOverrideCookieName,
   resolveReadingsWindow,
   type ReadingsWindowOverride,
 } from "@/lib/readings-window";
+import { getReadingsWindowMode } from "@/lib/readings-window-storage";
 
 export const metadata: Metadata = {
   title: "Окно показаний (тест)",
@@ -21,9 +19,7 @@ export const metadata: Metadata = {
 export default async function AdminReadingsWindowPage() {
   await requireAdmin("/admin/readings-window");
   const secretConfigured = Boolean(process.env.READINGS_ADMIN_SECRET?.length);
-  const cookieStore = await cookies();
-  const raw = cookieStore.get(readingsOverrideCookieName())?.value;
-  const override = parseReadingsOverrideCookie(raw);
+  const override = await getReadingsWindowMode();
   const now = new Date();
   const moscowDay = getCalendarDayInTimeZone(now, "Europe/Moscow");
   const byRule = isDefaultReadingsWindowOpen(now, "Europe/Moscow");
@@ -83,11 +79,11 @@ export default async function AdminReadingsWindowPage() {
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-emerald-800">Переопределение (cookie)</dt>
+            <dt className="font-medium text-emerald-800">Режим для всех посетителей</dt>
             <dd className="mt-1 text-emerald-950">{overrideLabel[override]}</dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="font-medium text-emerald-800">Итог для вашего браузера</dt>
+            <dt className="font-medium text-emerald-800">Итог на сайте для всех</dt>
             <dd className="mt-1 text-base font-semibold text-emerald-950">
               {effective === "open"
                 ? "Показывается форма передачи показаний"

@@ -1,25 +1,18 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { InnerPageSurface } from "@/components/InnerPageSurface";
 import { MeterReadingsForm } from "@/components/MeterReadingsForm";
 import { ReadingsClosedNotice } from "@/components/ReadingsClosedNotice";
 import type { Building } from "@/data/buildings";
 import { METER_LABELS } from "@/data/meters";
-import {
-  parseReadingsOverrideCookie,
-  readingsOverrideCookieName,
-  resolveReadingsWindow,
-} from "@/lib/readings-window";
+import { resolveReadingsWindow } from "@/lib/readings-window";
+import { getReadingsWindowMode } from "@/lib/readings-window-storage";
 
 export async function BuildingReadingsView({
   building,
 }: {
   building: Building;
 }) {
-  const cookieStore = await cookies();
-  const override = parseReadingsOverrideCookie(
-    cookieStore.get(readingsOverrideCookieName())?.value,
-  );
+  const override = await getReadingsWindowMode();
   const windowOpen = resolveReadingsWindow(override) === "open";
   const metersList = building.meters.map((id) => METER_LABELS[id]).join(", ");
 

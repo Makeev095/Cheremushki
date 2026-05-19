@@ -1,11 +1,7 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { getBuildingBySlug } from "@/data/buildings";
-import {
-  parseReadingsOverrideCookie,
-  readingsOverrideCookieName,
-  resolveReadingsWindow,
-} from "@/lib/readings-window";
+import { resolveReadingsWindow } from "@/lib/readings-window";
+import { getReadingsWindowMode } from "@/lib/readings-window-storage";
 import { isMeterId, METER_LABELS } from "@/data/meters";
 import { appendReading, readAllReadings } from "@/lib/readings-storage";
 import {
@@ -16,10 +12,7 @@ import {
 const MAX_BODY = 24_000;
 
 export async function POST(request: Request) {
-  const cookieStore = await cookies();
-  const override = parseReadingsOverrideCookie(
-    cookieStore.get(readingsOverrideCookieName())?.value,
-  );
+  const override = await getReadingsWindowMode();
   if (resolveReadingsWindow(override) === "closed") {
     return NextResponse.json(
       {

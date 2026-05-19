@@ -1,10 +1,9 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import type { ReadingsWindowOverride } from "@/lib/readings-window";
 import {
-  parseReadingsOverrideCookie,
-  readingsOverrideCookieName,
-  type ReadingsWindowOverride,
-} from "@/lib/readings-window";
+  getReadingsWindowMode,
+  setReadingsWindowMode,
+} from "@/lib/readings-window-storage";
 
 const MAX_BODY = 4096;
 
@@ -54,22 +53,16 @@ export async function POST(request: Request) {
     });
   }
 
-  const mode = o.mode;
-  const res = NextResponse.json({ ok: true as const, mode });
-  res.cookies.set(readingsOverrideCookieName(), mode, {
-    httpOnly: true,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 90,
-    secure: process.env.NODE_ENV === "production",
+  const stored = await setReadingsWindowMode(o.mode);
+  return NextResponse.json({
+    ok: true as const,
+    mode: stored.mode,
+    updatedAt: stored.updatedAt,
   });
-  return res;
 }
 
-/** Диагностика: текущее переопределение (без секрета). */
+/** Текущий режим для всех посетителей (без секрета). */
 export async function GET() {
-  const cookieStore = await cookies();
-  const raw = cookieStore.get(readingsOverrideCookieName())?.value;
-  const mode = parseReadingsOverrideCookie(raw);
+  const mode = await getReadingsWindowMode();
   return NextResponse.json({ mode });
 }
