@@ -11,9 +11,10 @@ OUT="deploy-bundle"
 rm -rf "$OUT"
 mkdir -p "$OUT"
 
-echo "→ Копирование standalone-сервера"
-cp -r .next/standalone/* "$OUT/"
-mkdir -p "$OUT/.next"
+echo "→ Копирование standalone-сервера (включая .next)"
+# «*» не копирует скрытые каталоги — из‑за этого на VPS не было BUILD_ID
+mkdir -p "$OUT"
+cp -a .next/standalone/. "$OUT/"
 cp -r .next/static "$OUT/.next/static"
 cp -r public "$OUT/public"
 
