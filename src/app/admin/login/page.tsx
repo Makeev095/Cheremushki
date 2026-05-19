@@ -42,8 +42,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
           Вход
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-emerald-900/85">
-          Доступ к показаниям и выгрузке Excel только для сотрудников УК.
-          Введите пароль.
+          
         </p>
         <div className="mt-8">
           <AdminLoginForm
