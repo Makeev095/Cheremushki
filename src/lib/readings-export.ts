@@ -6,6 +6,7 @@ import {
   readReadingsBySlug,
   READINGS_TABLE_HEADERS,
   readingToRow,
+  sortReadingsByApartment,
   type StoredReading,
 } from "@/lib/readings-storage";
 
@@ -15,9 +16,10 @@ function sanitizeSheetName(name: string): string {
 }
 
 function sheetFromReadings(rows: StoredReading[]): XLSX.WorkSheet {
+  const sorted = sortReadingsByApartment(rows);
   const data = [
     [...READINGS_TABLE_HEADERS],
-    ...rows.map((r) => readingToRow(r)),
+    ...sorted.map((r) => readingToRow(r)),
   ];
   return XLSX.utils.aoa_to_sheet(data);
 }

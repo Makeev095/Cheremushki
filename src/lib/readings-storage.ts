@@ -70,6 +70,21 @@ export async function countBySlug(): Promise<Record<string, number>> {
   return counts;
 }
 
+/** Сортировка квартир по номеру (1, 2, 10, 12а …). */
+export function compareApartmentsAscending(a: string, b: string): number {
+  return a
+    .trim()
+    .localeCompare(b.trim(), "ru", { numeric: true, sensitivity: "base" });
+}
+
+export function sortReadingsByApartment(
+  rows: StoredReading[],
+): StoredReading[] {
+  return [...rows].sort((x, y) =>
+    compareApartmentsAscending(x.apartment, y.apartment),
+  );
+}
+
 /** Строка для таблицы / Excel: фиксированный порядок счётчиков */
 export function readingToRow(r: StoredReading): string[] {
   return [
