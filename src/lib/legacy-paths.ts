@@ -3,14 +3,32 @@ import {
   getBuildingBySlug,
   type Building,
 } from "@/data/buildings";
+import legacyOverrides from "@/data/legacy-path-overrides.json";
 
-/** Путь как на старом сайте: bulgakova_5, strelkovoy_divizii_19_korpus_1 */
+const LEGACY_PATH_BY_SLUG = legacyOverrides.bySlug as Record<string, string>;
+const LEGACY_PATH_ALIASES = legacyOverrides.aliases as Record<string, string>;
+
+/** Путь как на cheremushki.online: bulgakova_5, bulgakova_17/1, podstancionnaya_22_a */
 export function slugToLegacyPath(slug: string): string {
-  return slug.replace(/-/g, "_");
+  return LEGACY_PATH_BY_SLUG[slug] ?? slug.replace(/-/g, "_");
 }
 
-export function legacyPathToSlug(legacyPath: string): string {
-  return legacyPath.trim().replace(/_/g, "-");
+export function normalizeLegacyPath(path: string): string {
+  return path.trim().toLowerCase().replace(/^\/+|\/+$/g, "");
+}
+
+const pathToSlug = new Map<string, string>();
+
+function registerPath(path: string, slug: string) {
+  pathToSlug.set(normalizeLegacyPath(path), slug);
+}
+
+for (const building of getAllBuildings()) {
+  registerPath(slugToLegacyPath(building.slug), building.slug);
+}
+
+for (const [aliasPath, slug] of Object.entries(LEGACY_PATH_ALIASES)) {
+  registerPath(aliasPath, slug);
 }
 
 /** Сегменты URL, которые не являются страницами домов */
@@ -26,11 +44,16 @@ export const RESERVED_ROOT_SEGMENTS = new Set([
 export function getBuildingByLegacyPath(
   legacyPath: string,
 ): Building | undefined {
-  const normalized = legacyPath.trim().toLowerCase();
-  if (!normalized || RESERVED_ROOT_SEGMENTS.has(normalized)) {
-    return undefined;
-  }
-  return getBuildingBySlug(legacyPathToSlug(normalized));
+  const normalized = normalizeLegacyPath(legacyPath);
+  if (!normalized) return undefined;
+
+  const root = normalized.split("/")[0];
+  if (RESERVED_ROOT_SEGMENTS.has(root)) return undefined;
+
+  const slug = pathToSlug.get(normalized);
+  if (slug) return getBuildingBySlug(slug);
+
+  return undefined;
 }
 
 export function getAllLegacyPaths(): { legacyPath: string; slug: string }[] {

@@ -1,0 +1,28 @@
+{
+  "bySlug": {
+    "dzerzhinskogo-57": "dzerjinskogo_57",
+    "bulgakova-17-korpus-1": "bulgakova_17/1",
+    "oranjereynaya-22-korpus-2": "oranjereynaya_22/2",
+    "podstancionnaya-22a": "podstancionnaya_22_a",
+    "universitetskaya-36a": "universitetskaya_36_a",
+    "strelkovoy-divizii-13-korpus-2": "strelkovoy_divizii_13/2",
+    "strelkovoy-divizii-19-korpus-1": "strelkovoy_divizii_19/1",
+    "strelkovoy-divizii-19-korpus-2": "strelkovoy_divizii_19/2",
+    "strelkovoy-divizii-19-korpus-3": "strelkovoy_divizii_19/3",
+    "strelkovoy-divizii-19-korpus-4": "strelkovoy_divizii_19/4",
+    "strelkovoy-divizii-19-korpus-5": "strelkovoy_divizii_19/5"
+  },
+  "aliases": {
+    "dzerzhinskogo_57": "dzerzhinskogo-57",
+    "bulgakova_17_korpus_1": "bulgakova-17-korpus-1",
+    "oranjereynaya_22_korpus_2": "oranjereynaya-22-korpus-2",
+    "podstancionnaya_22a": "podstancionnaya-22a",
+    "universitetskaya_36a": "universitetskaya-36a",
+    "strelkovoy_divizii_13_korpus_2": "strelkovoy-divizii-13-korpus-2",
+    "strelkovoy_divizii_19_korpus_1": "strelkovoy-divizii-19-korpus-1",
+    "strelkovoy_divizii_19_korpus_2": "strelkovoy-divizii-19-korpus-2",
+    "strelkovoy_divizii_19_korpus_3": "strelkovoy-divizii-19-korpus-3",
+    "strelkovoy_divizii_19_korpus_4": "strelkovoy-divizii-19-korpus-4",
+    "strelkovoy_divizii_19_korpus_5": "strelkovoy-divizii-19-korpus-5"
+  }
+}

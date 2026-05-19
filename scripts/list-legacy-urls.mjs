@@ -8,6 +8,9 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const src = readFileSync(join(root, "src/data/buildings.ts"), "utf8");
+const overrides = JSON.parse(
+  readFileSync(join(root, "src/data/legacy-path-overrides.json"), "utf8"),
+);
 
 const rows = [];
 const re =
@@ -16,7 +19,8 @@ let m;
 while ((m = re.exec(src)) !== null) {
   const slug = m[1];
   const title = m[2];
-  const legacyPath = slug.replace(/-/g, "_");
+  const legacyPath =
+    overrides.bySlug[slug] ?? slug.replace(/-/g, "_");
   rows.push({ slug, legacyPath, title });
 }
 
