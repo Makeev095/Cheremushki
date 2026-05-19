@@ -10,6 +10,7 @@ import { InnerPageSurface } from "@/components/InnerPageSurface";
 import { getAllBuildings } from "@/data/buildings";
 import {
   filterReadingsByPeriod,
+  formatPeriodLabel,
   parsePeriodParam,
   periodOptionsFromRows,
 } from "@/lib/readings-period";
@@ -36,12 +37,14 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
   const all = await readAllReadings();
   const filtered = filterReadingsByPeriod(all, period);
   const periods = periodOptionsFromRows(all);
+  const totalOnServer = all.length;
+  const totalFiltered = filtered.length;
+  const periodFiltered = period != null;
 
   const counts: Record<string, number> = {};
   for (const r of filtered) {
     counts[r.slug] = (counts[r.slug] ?? 0) + 1;
   }
-  const total = filtered.length;
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
@@ -58,9 +61,36 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
         <h1 className="mt-6 text-2xl font-bold tracking-tight text-emerald-950">
           Показания счётчиков
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-emerald-900/85">
-      
-        </p>
+        <div className="mt-6 rounded-2xl border border-emerald-900/10 bg-emerald-50/50 px-4 py-4 text-sm text-emerald-900/90 sm:px-5">
+          <p>
+            Все показания хранятся <strong className="text-emerald-950">на сервере</strong>{" "}
+            в одном файле — с телефона, планшета и компьютера в админке на{" "}
+            <strong className="text-emerald-950">cheremushki.online</strong> числа
+            одинаковые.
+          </p>
+          <p className="mt-2">
+            Всего записей на сервере:{" "}
+            <strong className="text-emerald-950">{totalOnServer}</strong>
+            {periodFiltered ? (
+              <>
+                {" "}
+                · за период «{formatPeriodLabel(period)}»:{" "}
+                <strong className="text-emerald-950">{totalFiltered}</strong>
+              </>
+            ) : null}
+          </p>
+          {periodFiltered && totalFiltered !== totalOnServer ? (
+            <p className="mt-2 font-medium text-amber-950">
+              Включён фильтр по месяцу — часть записей скрыта.{" "}
+              <Link
+                href="/admin/readings"
+                className="underline decoration-amber-600 underline-offset-2 hover:text-amber-900"
+              >
+                Показать все периоды
+              </Link>
+            </p>
+          ) : null}
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-4 text-sm">
           <Link
@@ -82,7 +112,7 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
             <AdminPeriodControls
               periods={periods}
               showDownloadAll
-              recordCount={total}
+              recordCount={totalFiltered}
             />
           </div>
         </Suspense>

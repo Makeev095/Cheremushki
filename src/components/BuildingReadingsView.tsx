@@ -20,10 +20,10 @@ export async function BuildingReadingsView({
     <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <Link
-          href="/#pokazaniya"
+          href="/"
           className="text-sm font-medium text-emerald-800 hover:text-emerald-950"
         >
-          ← Все дома
+          ← На главную
         </Link>
         <h1 className="mt-6 text-3xl font-bold tracking-tight text-emerald-950">
           Показания: {building.title}

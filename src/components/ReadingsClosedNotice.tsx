@@ -17,19 +17,18 @@ export function ReadingsClosedNotice() {
             Внимание!
           </h2>
           <p className="text-base leading-relaxed text-amber-950/95 sm:text-[1.05rem]">
-            Показания соответствующих приборов учёта собственников{" "}
+            Показания индивидуальных приборов учёта коммунальных услуг {" "}
             <strong className="font-semibold text-amber-950 underline decoration-amber-300 decoration-2 underline-offset-2">
-              обязаны
+
             </strong>{" "}
-            предоставлять{" "}
+            предоставляются собственниками{" "}
             <strong className="font-semibold text-amber-950">
-              с 20 по 24 (включительно) числа
+              в период с 20 по 24 число (включительно) каждого месяца
             </strong>{" "}
-            каждого месяца, в противном случае начисляется{" "}
+            {" "}
             <strong className="font-semibold text-amber-950 underline decoration-amber-300 decoration-2 underline-offset-2">
-              норматив
-            </strong>{" "}
-            (п.&nbsp;59, п.&nbsp;60 Постановления Правительства РФ №&nbsp;354).
+              
+            </strong>{" "}.
           </p>
           <p className="text-sm leading-relaxed text-amber-900/85">
             

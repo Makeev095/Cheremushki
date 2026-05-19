@@ -43,12 +43,6 @@ export function SiteHeader() {
             Контакты
           </Link>
           <Link
-            href="/#pokazaniya"
-            className="rounded-lg px-3 py-2 hover:bg-emerald-50 hover:text-emerald-950"
-          >
-            Показания
-          </Link>
-          <Link
             href="/admin/login"
             className="rounded-lg px-3 py-2 text-emerald-800/80 hover:bg-emerald-50 hover:text-emerald-950"
           >

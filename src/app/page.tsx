@@ -1,11 +1,7 @@
 import Link from "next/link";
-import { getAllBuildings } from "@/data/buildings";
-import { legacyPathForBuilding } from "@/lib/legacy-paths";
 import { HERO_COMPANY_INTRO } from "@/data/site";
 
 export default function Home() {
-  const buildings = getAllBuildings();
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
       <section className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/10">
@@ -32,38 +28,6 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
-
-      <section
-        id="pokazaniya"
-        className="mt-14 scroll-mt-24 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-10"
-      >
-        <h2 className="text-2xl font-semibold tracking-tight text-emerald-950">
-          Передача показаний
-        </h2>
-        <p className="mt-2 max-w-2xl text-emerald-900/80">
-          
-        </p>
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-          {buildings.map((b) => (
-            <li key={b.slug}>
-              <Link
-                href={`/${legacyPathForBuilding(b)}`}
-                className="group flex flex-col rounded-2xl border border-emerald-900/10 bg-emerald-50/40 p-5 transition hover:border-emerald-700/30 hover:bg-emerald-50/80"
-              >
-                <span className="font-semibold text-emerald-950 group-hover:text-emerald-800">
-                  {b.title}
-                </span>
-                <span className="mt-1 text-sm text-emerald-800/75">
-                  {b.addressLine}
-                </span>
-                <span className="mt-3 text-sm font-medium text-emerald-700">
-                  Передать показания →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <div className="mt-14 grid gap-10 lg:grid-cols-2">

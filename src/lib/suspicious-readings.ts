@@ -1,6 +1,6 @@
 import { mkdir, readFile, appendFile } from "node:fs/promises";
-import path from "node:path";
 import type { MeterId } from "@/data/meters";
+import { dataFilePath, getDataDir } from "@/lib/data-dir";
 import { METER_LABELS } from "@/data/meters";
 import { formatPeriodLabel, periodKeyFromIso } from "@/lib/readings-period";
 import type { StoredReading } from "@/lib/readings-storage";
@@ -29,8 +29,7 @@ export interface SuspiciousRecord {
   meters: SuspiciousMeterDetail[];
 }
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const SUSPICIOUS_FILE = path.join(DATA_DIR, "suspicious-readings.jsonl");
+const SUSPICIOUS_FILE = dataFilePath("suspicious-readings.jsonl");
 
 function newId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
@@ -172,7 +171,7 @@ export function detectSuspiciousForReading(
 export async function appendSuspiciousRecord(
   record: SuspiciousRecord,
 ): Promise<void> {
-  await mkdir(DATA_DIR, { recursive: true });
+  await mkdir(getDataDir(), { recursive: true });
   await appendFile(SUSPICIOUS_FILE, `${JSON.stringify(record)}\n`, "utf8");
 }
 
@@ -247,7 +246,7 @@ export async function rebuildSuspiciousIndex(
     }
   }
 
-  await mkdir(DATA_DIR, { recursive: true });
+  await mkdir(getDataDir(), { recursive: true });
   const { writeFile } = await import("node:fs/promises");
   const body = found.length
     ? `${found.map((r) => JSON.stringify(r)).join("\n")}\n`

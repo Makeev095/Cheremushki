@@ -1,7 +1,7 @@
 import { mkdir, readFile, appendFile } from "node:fs/promises";
-import path from "node:path";
 import type { MeterId } from "@/data/meters";
 import { METER_IDS } from "@/data/meters";
+import { dataFilePath, getDataDir } from "@/lib/data-dir";
 import { periodKeyFromIso } from "@/lib/readings-period";
 
 export interface StoredReading {
@@ -13,11 +13,10 @@ export interface StoredReading {
   submittedAt: string;
 }
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const DATA_FILE = path.join(DATA_DIR, "readings.jsonl");
+const DATA_FILE = dataFilePath("readings.jsonl");
 
 async function ensureDataDir(): Promise<void> {
-  await mkdir(DATA_DIR, { recursive: true });
+  await mkdir(getDataDir(), { recursive: true });
 }
 
 function newId(): string {
@@ -126,19 +125,18 @@ export function findMonthlyDuplicate(
   );
 }
 
-/** Строка для таблицы / Excel: фиксированный порядок счётчиков */
+/** Строка для таблицы / Excel: дата передачи — в последнем столбце */
 export function readingToRow(r: StoredReading): string[] {
   return [
-    r.submittedAt,
     r.slug,
     r.buildingTitle,
     r.apartment,
     ...METER_IDS.map((id) => r.readings[id] ?? ""),
+    r.submittedAt,
   ];
 }
 
 export const READINGS_TABLE_HEADERS = [
-  "Дата и время (ISO)",
   "Код дома",
   "Дом",
   "Квартира",
@@ -147,4 +145,5 @@ export const READINGS_TABLE_HEADERS = [
   "Газ",
   "Тепло",
   "Электричество",
+  "Дата и время (ISO)",
 ] as const;

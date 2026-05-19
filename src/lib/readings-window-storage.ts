@@ -1,12 +1,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import {
   parseReadingsOverrideCookie,
   type ReadingsWindowOverride,
 } from "@/lib/readings-window";
+import { dataFilePath, getDataDir } from "@/lib/data-dir";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const SETTINGS_FILE = path.join(DATA_DIR, "readings-window.json");
+const SETTINGS_FILE = dataFilePath("readings-window.json");
 
 interface StoredReadingsWindowSettings {
   mode: ReadingsWindowOverride;
@@ -14,7 +13,7 @@ interface StoredReadingsWindowSettings {
 }
 
 async function ensureDataDir(): Promise<void> {
-  await mkdir(DATA_DIR, { recursive: true });
+  await mkdir(getDataDir(), { recursive: true });
 }
 
 /** Режим видимости формы для всех посетителей сайта. */

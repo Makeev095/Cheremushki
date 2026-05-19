@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!b) return { title: "Дом не найден" };
   return {
     title: `Показания — ${b.title}`,
-    description: `Передача показаний приборов учёта: ${b.addressLine}.`,
+    description: `Передача показаний индивидуальных приборов учёта: ${b.addressLine}.`,
   };
 }
 

@@ -17,6 +17,28 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: rootDir,
   },
+  async headers() {
+    return [
+      {
+        source: "/admin/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate",
+          },
+        ],
+      },
+      {
+        source: "/api/admin/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return Object.entries(legacyPathAliases)
       .map(([aliasPath, slug]) => {
