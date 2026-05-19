@@ -3,7 +3,11 @@ import { getBuildingBySlug } from "@/data/buildings";
 import { resolveReadingsWindow } from "@/lib/readings-window";
 import { getReadingsWindowMode } from "@/lib/readings-window-storage";
 import { isMeterId, METER_LABELS } from "@/data/meters";
-import { appendReading, readAllReadings } from "@/lib/readings-storage";
+import {
+  appendReading,
+  findMonthlyDuplicate,
+  readAllReadings,
+} from "@/lib/readings-storage";
 import {
   appendSuspiciousRecord,
   detectSuspiciousForReading,
@@ -112,6 +116,16 @@ export async function POST(request: Request) {
   }
 
   try {
+    const all = await readAllReadings();
+    const duplicate = findMonthlyDuplicate(
+      all,
+      { slug, apartment, readings, submittedAt },
+      building.meters,
+    );
+    if (duplicate) {
+      return NextResponse.json({ ok: true, duplicate: true });
+    }
+
     const saved = await appendReading({
       slug,
       buildingTitle: building.title,
@@ -120,7 +134,6 @@ export async function POST(request: Request) {
       submittedAt,
     });
 
-    const all = await readAllReadings();
     const suspicious = detectSuspiciousForReading(
       saved,
       all,
@@ -130,7 +143,7 @@ export async function POST(request: Request) {
       await appendSuspiciousRecord(suspicious);
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, duplicate: false });
   } catch {
     return NextResponse.json(
       { ok: false, error: "Не удалось сохранить показания." },

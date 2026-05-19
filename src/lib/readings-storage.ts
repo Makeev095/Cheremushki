@@ -2,6 +2,7 @@ import { mkdir, readFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import type { MeterId } from "@/data/meters";
 import { METER_IDS } from "@/data/meters";
+import { periodKeyFromIso } from "@/lib/readings-period";
 
 export interface StoredReading {
   id: string;
@@ -82,6 +83,46 @@ export function sortReadingsByApartment(
 ): StoredReading[] {
   return [...rows].sort((x, y) =>
     compareApartmentsAscending(x.apartment, y.apartment),
+  );
+}
+
+export function normalizeReadingValue(raw: string): string {
+  return raw.trim().replace(",", ".");
+}
+
+export function readingsMatchForMeters(
+  a: Partial<Record<MeterId, string>>,
+  b: Partial<Record<MeterId, string>>,
+  meterIds: readonly MeterId[],
+): boolean {
+  for (const id of meterIds) {
+    if (normalizeReadingValue(a[id] ?? "") !== normalizeReadingValue(b[id] ?? "")) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/** Полный дубликат: тот же дом, квартира, месяц (МСК) и те же показания. */
+export function findMonthlyDuplicate(
+  rows: StoredReading[],
+  candidate: {
+    slug: string;
+    apartment: string;
+    readings: Partial<Record<MeterId, string>>;
+    submittedAt: string;
+  },
+  meterIds: readonly MeterId[],
+): StoredReading | undefined {
+  const period = periodKeyFromIso(candidate.submittedAt);
+  if (!period) return undefined;
+  const apartment = candidate.apartment.trim();
+  return rows.find(
+    (r) =>
+      r.slug === candidate.slug &&
+      r.apartment.trim() === apartment &&
+      periodKeyFromIso(r.submittedAt) === period &&
+      readingsMatchForMeters(r.readings, candidate.readings, meterIds),
   );
 }
 
