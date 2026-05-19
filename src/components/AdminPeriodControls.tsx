@@ -6,9 +6,9 @@ import { formatPeriodLabel } from "@/lib/readings-period";
 import { readingsExportHref } from "@/lib/readings-export-href";
 
 const btnPrimary =
-  "inline-flex rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700";
+  "inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 sm:w-auto";
 const btnDisabled =
-  "inline-flex cursor-not-allowed rounded-xl bg-emerald-800/40 px-4 py-2.5 text-sm font-semibold text-white/90";
+  "inline-flex min-h-11 w-full cursor-not-allowed items-center justify-center rounded-xl bg-emerald-800/40 px-4 py-2.5 text-sm font-semibold text-white/90 sm:w-auto";
 
 export function AdminPeriodControls({
   periods,
@@ -82,7 +82,7 @@ export function AdminPeriodControls({
           </select>
         </label>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
           {showDownloadAll &&
             (recordCount !== undefined && recordCount > 0 ? (
               <a href={exportAllHref} className={btnPrimary}>
@@ -164,7 +164,7 @@ export function AdminBuildingExportLink({
     <a
       href={href}
       title={`Показания: ${buildingTitle}, ${periodHint}`}
-      className="rounded-xl border border-emerald-800/30 bg-white px-3 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50"
+      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-emerald-800/30 bg-white px-3 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 sm:w-auto"
     >
       Скачать Excel
     </a>

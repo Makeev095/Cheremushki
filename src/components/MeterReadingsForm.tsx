@@ -82,15 +82,15 @@ export function MeterReadingsForm({ building }: { building: Building }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-6 rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-8"
+      className="space-y-5 rounded-2xl border border-emerald-900/10 bg-white p-4 shadow-sm sm:space-y-6 sm:p-8"
     >
       {status === "success" && message && (
         <div
-          className="rounded-2xl border-2 border-emerald-600 bg-emerald-50 px-6 py-8 text-center shadow-md ring-4 ring-emerald-600/15 sm:px-10 sm:py-10"
+          className="rounded-2xl border-2 border-emerald-600 bg-emerald-50 px-4 py-6 text-center shadow-md ring-4 ring-emerald-600/15 sm:px-10 sm:py-10"
           role="status"
           aria-live="polite"
         >
-          <p className="text-2xl font-bold tracking-tight text-emerald-950 sm:text-3xl">
+          <p className="text-xl font-bold tracking-tight text-emerald-950 sm:text-3xl">
             {message}
           </p>
           <p className="mt-4 text-base font-medium text-emerald-800 sm:text-lg">
@@ -118,7 +118,7 @@ export function MeterReadingsForm({ building }: { building: Building }) {
             autoComplete="off"
             value={apartment}
             onChange={(e) => setApartment(e.target.value)}
-            className="mt-2 w-full max-w-xs rounded-xl border border-emerald-900/15 bg-emerald-50/30 px-4 py-3 text-emerald-950 outline-none ring-emerald-600/30 focus:ring-2 disabled:cursor-not-allowed"
+            className="mt-2 w-full rounded-xl border border-emerald-900/15 bg-emerald-50/30 px-4 py-3.5 text-emerald-950 outline-none ring-emerald-600/30 focus:ring-2 disabled:cursor-not-allowed"
             placeholder="Например, 42"
           />
         </div>
@@ -140,7 +140,7 @@ export function MeterReadingsForm({ building }: { building: Building }) {
               onChange={(e) =>
                 setValues((prev) => ({ ...prev, [id]: e.target.value }))
               }
-              className="mt-2 w-full max-w-sm rounded-xl border border-emerald-900/15 bg-emerald-50/30 px-4 py-3 text-emerald-950 outline-none ring-emerald-600/30 focus:ring-2 disabled:cursor-not-allowed"
+              className="mt-2 w-full rounded-xl border border-emerald-900/15 bg-emerald-50/30 px-4 py-3.5 text-emerald-950 outline-none ring-emerald-600/30 focus:ring-2 disabled:cursor-not-allowed"
               placeholder="Показания счётчика"
             />
           </div>
@@ -156,7 +156,7 @@ export function MeterReadingsForm({ building }: { building: Building }) {
           <button
             type="submit"
             disabled={status === "loading"}
-            className="inline-flex items-center justify-center rounded-xl bg-emerald-800 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-800 px-6 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60 sm:inline-flex sm:w-auto sm:text-sm"
           >
             {status === "loading" ? "Отправка…" : "Отправить показания"}
           </button>

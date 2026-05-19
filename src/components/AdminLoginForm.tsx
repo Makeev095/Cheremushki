@@ -88,11 +88,11 @@ export function AdminLoginForm({
           placeholder="Введите пароль"
         />
       </label>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
         <button
           type="submit"
           disabled={loading}
-          className="rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-50"
+          className="min-h-11 w-full rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-50 sm:w-auto"
         >
           {loading ? "…" : "Войти"}
         </button>
@@ -101,7 +101,7 @@ export function AdminLoginForm({
             type="button"
             disabled={loading}
             onClick={() => logout()}
-            className="rounded-xl border border-emerald-800/30 bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 disabled:opacity-50"
+            className="min-h-11 w-full rounded-xl border border-emerald-800/30 bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 disabled:opacity-50 sm:w-auto"
           >
             Выйти
           </button>

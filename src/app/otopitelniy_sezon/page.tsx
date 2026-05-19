@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function HeatingSeasonPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto max-w-3xl px-3 py-8 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <Link
           href="/"
@@ -20,7 +20,7 @@ export default function HeatingSeasonPage() {
         >
           ← На главную
         </Link>
-        <h1 className="mt-6 text-3xl font-bold tracking-tight text-emerald-950">
+        <h1 className="mt-5 text-2xl font-bold leading-tight tracking-tight text-emerald-950 sm:mt-6 sm:text-3xl">
           Подготовка к отопительному сезону 2025–2026
         </h1>
         <p className="mt-4 text-base leading-relaxed text-emerald-900/85">

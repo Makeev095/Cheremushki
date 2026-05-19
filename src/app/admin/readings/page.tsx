@@ -47,7 +47,7 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto max-w-5xl px-3 py-8 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Link
@@ -127,7 +127,7 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
             return (
               <li
                 key={b.slug}
-                className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-900/10 bg-white px-4 py-4 sm:px-5"
+                className="flex flex-col gap-3 rounded-2xl border border-emerald-900/10 bg-white px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-5"
               >
                 <div>
                   <p className="font-semibold text-emerald-950">{b.title}</p>
@@ -137,10 +137,10 @@ export default async function AdminReadingsPage({ searchParams }: Props) {
                       : `${n} ${n === 1 ? "запись" : n < 5 ? "записи" : "записей"}`}
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
                   <Link
                     href={tableHref}
-                    className="rounded-xl border border-emerald-800/30 bg-emerald-50/50 px-3 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50"
+                    className="inline-flex min-h-11 items-center justify-center rounded-xl border border-emerald-800/30 bg-emerald-50/50 px-3 py-2 text-sm font-semibold text-emerald-900 hover:bg-emerald-50"
                   >
                     Таблица
                   </Link>

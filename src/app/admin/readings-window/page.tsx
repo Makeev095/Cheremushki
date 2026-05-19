@@ -32,7 +32,7 @@ export default async function AdminReadingsWindowPage() {
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto max-w-3xl px-3 py-8 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <div className="flex flex-wrap gap-4 text-sm">
           <Link

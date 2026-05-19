@@ -76,12 +76,12 @@ export function AdminReadingsWindowForm({
           placeholder="READINGS_ADMIN_SECRET"
         />
       </label>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
         <button
           type="button"
           disabled={loading}
           onClick={() => submit("auto")}
-          className="rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-50"
+          className="min-h-11 w-full rounded-xl bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-50 sm:w-auto"
         >
           Автоматическое закрытие и открытие
         </button>
@@ -89,7 +89,7 @@ export function AdminReadingsWindowForm({
           type="button"
           disabled={loading}
           onClick={() => submit("open")}
-          className="rounded-xl border border-emerald-800/30 bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 disabled:opacity-50"
+          className="min-h-11 w-full rounded-xl border border-emerald-800/30 bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 hover:bg-emerald-50 disabled:opacity-50 sm:w-auto"
         >
           Отображать только форму показаний
         </button>
@@ -97,7 +97,7 @@ export function AdminReadingsWindowForm({
           type="button"
           disabled={loading}
           onClick={() => submit("closed")}
-          className="rounded-xl border border-amber-700/40 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:opacity-50"
+          className="min-h-11 w-full rounded-xl border border-amber-700/40 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-950 hover:bg-amber-100 disabled:opacity-50 sm:w-auto"
         >
           Запретить передачу показаний
         </button>

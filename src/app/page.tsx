@@ -3,10 +3,10 @@ import { HERO_COMPANY_INTRO } from "@/data/site";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <section className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/10">
+    <main className="mx-auto max-w-5xl px-3 py-8 sm:px-6 sm:py-16">
+      <section className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/10 sm:rounded-3xl">
         <div
-          className="absolute inset-0 bg-[url('/hero-eagle.png')] bg-cover bg-[center_38%] sm:bg-[center_35%]"
+          className="absolute inset-0 bg-[url('/hero-eagle.png')] bg-cover bg-[center_42%] sm:bg-[center_35%]"
           aria-hidden
         />
         <div
@@ -14,26 +14,26 @@ export default function Home() {
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-slate-900/30 sm:to-slate-900/15"
+          className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-slate-900/25 sm:from-slate-950/75 sm:via-transparent sm:to-slate-900/15"
           aria-hidden
         />
 
-        <div className="relative flex min-h-[min(78vh,560px)] flex-col justify-end px-5 pb-10 pt-28 sm:min-h-[min(72vh,620px)] sm:justify-center sm:px-10 sm:pb-16 sm:pt-20 lg:px-14">
-          <div className="max-w-xl sm:ml-auto sm:text-right">
-            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight text-white drop-shadow-md sm:text-4xl lg:text-[2.75rem]">
+        <div className="relative flex min-h-[min(70vh,520px)] flex-col justify-end px-4 pb-8 pt-24 sm:min-h-[min(72vh,620px)] sm:justify-center sm:px-10 sm:pb-16 sm:pt-20 lg:px-14">
+          <div className="max-w-xl text-center sm:ml-auto sm:text-right">
+            <h1 className="text-[1.65rem] font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-4xl lg:text-[2.75rem]">
               ООО «УК Черёмушки»
             </h1>
-            <p className="mt-5 text-base leading-relaxed text-white/93 drop-shadow sm:ml-auto sm:max-w-lg sm:text-lg">
+            <p className="mx-auto mt-4 max-w-md text-xl font-semibold leading-snug text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] sm:mt-5 sm:ml-auto sm:max-w-lg sm:text-2xl sm:leading-relaxed lg:text-[1.85rem]">
               {HERO_COMPANY_INTRO}
             </p>
           </div>
         </div>
       </section>
 
-      <div className="mt-14 grid gap-10 lg:grid-cols-2">
+      <div className="mt-10 grid gap-8 sm:mt-14 sm:gap-10 lg:grid-cols-2">
         <section
           id="grafik"
-          className="scroll-mt-24 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-8"
+          className="scroll-mt-24 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-sm sm:rounded-3xl sm:p-8"
         >
           <h2 className="text-xl font-semibold text-emerald-950">
             График работы
@@ -80,7 +80,7 @@ export default function Home() {
 
         <section
           id="kontakty"
-          className="scroll-mt-24 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-8"
+          className="scroll-mt-24 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-sm sm:rounded-3xl sm:p-8"
         >
           <h2 className="text-xl font-semibold text-emerald-950">Контакты</h2>
           <dl className="mt-6 space-y-5 text-emerald-900/90">
@@ -127,7 +127,7 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="mt-14 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-sm sm:p-8">
+      <section className="mt-10 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-sm sm:mt-14 sm:rounded-3xl sm:p-8">
         <h2 className="text-xl font-semibold text-emerald-950">
           Мероприятия по подготовке к отопительному сезону
         </h2>
@@ -137,13 +137,13 @@ export default function Home() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/otopitelniy_sezon"
-            className="inline-flex items-center justify-center rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 sm:w-auto"
           >
             Сезон 2025 - 2026
           </Link>
           <Link
             href="/otopitelniy_sezon2026-2027"
-            className="inline-flex items-center justify-center rounded-xl border border-emerald-900/15 bg-emerald-50/50 px-5 py-3 text-sm font-semibold text-emerald-900 transition hover:bg-emerald-50"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-emerald-900/15 bg-emerald-50/50 px-5 py-3 text-sm font-semibold text-emerald-900 transition hover:bg-emerald-50 sm:w-auto"
           >
             Сезон 2026 — 2027
           </Link>

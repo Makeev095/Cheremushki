@@ -17,7 +17,7 @@ export function HeatingDocList({ docs }: { docs: HeatingDocument[] }) {
         <li key={d.file}>
           <Link
             href={`/docs/${encodeURIComponent(d.file)}`}
-            className="flex items-center justify-between gap-4 rounded-2xl border border-emerald-900/10 bg-white px-5 py-4 text-sm font-medium text-emerald-950 shadow-sm transition hover:border-emerald-700/25 hover:bg-emerald-50/50"
+            className="flex flex-col gap-2 rounded-2xl border border-emerald-900/10 bg-white px-4 py-4 text-sm font-medium text-emerald-950 shadow-sm transition hover:border-emerald-700/25 hover:bg-emerald-50/50 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5"
           >
             <span>{d.title}</span>
             <span className="shrink-0 text-emerald-700">PDF →</span>

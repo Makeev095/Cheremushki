@@ -30,7 +30,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
   }
 
   return (
-    <main className="mx-auto max-w-md px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto max-w-md px-3 py-8 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <Link
           href="/"

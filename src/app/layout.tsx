@@ -9,6 +9,11 @@ const inter = Inter({
   subsets: ["latin", "cyrillic"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: {
     default: "ООО «УК Черёмушки» — официальный сайт",

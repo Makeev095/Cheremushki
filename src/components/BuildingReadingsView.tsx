@@ -17,7 +17,7 @@ export async function BuildingReadingsView({
   const metersList = building.meters.map((id) => METER_LABELS[id]).join(", ");
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto max-w-3xl px-3 py-8 sm:px-6 sm:py-14">
       <InnerPageSurface>
         <Link
           href="/"
@@ -25,10 +25,12 @@ export async function BuildingReadingsView({
         >
           ← На главную
         </Link>
-        <h1 className="mt-6 text-3xl font-bold tracking-tight text-emerald-950">
+        <h1 className="mt-5 text-2xl font-bold leading-tight tracking-tight text-emerald-950 sm:mt-6 sm:text-3xl">
           Показания: {building.title}
         </h1>
-        <p className="mt-2 text-emerald-900/85">{building.addressLine}</p>
+        <p className="mt-2 text-sm leading-relaxed text-emerald-900/85 sm:text-base">
+          {building.addressLine}
+        </p>
 
         {windowOpen ? (
           <>

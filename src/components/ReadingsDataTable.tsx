@@ -24,17 +24,19 @@ export function ReadingsDataTable({
 
   return (
     <div className="overflow-x-auto rounded-2xl border border-emerald-900/10">
-      <table className="min-w-full text-left text-sm">
+      <table className="min-w-full text-left text-xs sm:text-sm">
         <thead className="bg-emerald-50/80 text-emerald-900">
           <tr>
-            <th className="whitespace-nowrap px-4 py-3 font-semibold">Дата</th>
-            <th className="whitespace-nowrap px-4 py-3 font-semibold">
+            <th className="whitespace-nowrap px-2 py-2.5 font-semibold sm:px-4 sm:py-3">
+              Дата
+            </th>
+            <th className="whitespace-nowrap px-2 py-2.5 font-semibold sm:px-4 sm:py-3">
               Квартира
             </th>
             {meterIds.map((id) => (
               <th
                 key={id}
-                className="whitespace-nowrap px-4 py-3 font-semibold"
+                className="whitespace-nowrap px-2 py-2.5 font-semibold sm:px-4 sm:py-3"
               >
                 {METER_LABELS[id]}
               </th>
@@ -44,14 +46,14 @@ export function ReadingsDataTable({
         <tbody className="divide-y divide-emerald-900/10 bg-white">
           {rows.map((r) => (
             <tr key={r.id} className="text-emerald-950">
-              <td className="whitespace-nowrap px-4 py-2.5">
+              <td className="whitespace-nowrap px-2 py-2 sm:px-4 sm:py-2.5">
                 {formatDate(r.submittedAt)}
               </td>
-              <td className="whitespace-nowrap px-4 py-2.5 font-medium">
+              <td className="whitespace-nowrap px-2 py-2 font-medium sm:px-4 sm:py-2.5">
                 {r.apartment}
               </td>
               {meterIds.map((id) => (
-                <td key={id} className="whitespace-nowrap px-4 py-2.5">
+                <td key={id} className="whitespace-nowrap px-2 py-2 sm:px-4 sm:py-2.5">
                   {r.readings[id] ?? "—"}
                 </td>
               ))}
