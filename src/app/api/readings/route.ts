@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { getBuildingBySlug } from "@/data/buildings";
 import { resolveReadingsWindow } from "@/lib/readings-window";
 import { getReadingsWindowMode } from "@/lib/readings-window-storage";
-import { isMeterId, METER_LABELS } from "@/data/meters";
+import { isMeterId, METER_LABELS, type MeterId } from "@/data/meters";
+import { isWaterMeter, parseMeterReading } from "@/lib/meter-reading-parse";
 import {
   appendReading,
   findMonthlyDuplicate,
@@ -91,15 +92,19 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    const t = v.trim().replace(",", ".");
-    const n = Number(t);
-    if (!Number.isFinite(n) || n < 0 || n > 1_000_000_000) {
+    const parsed = parseMeterReading(v, meterId as MeterId);
+    if (!parsed.ok) {
       return NextResponse.json(
-        { ok: false, error: "Некорректные показания." },
+        {
+          ok: false,
+          error: isWaterMeter(meterId as MeterId)
+            ? `Некорректные показания: ${METER_LABELS[meterId as MeterId]}.`
+            : "Некорректные показания.",
+        },
         { status: 400 },
       );
     }
-    readings[meterId] = t;
+    readings[meterId] = parsed.value;
   }
 
   for (const k of Object.keys(readingsIn as object)) {

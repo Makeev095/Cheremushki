@@ -96,7 +96,7 @@ export const BUILDINGS: Building[] = [
     slug: "universitetskaya-34",
     title: "Университетская, 34",
     addressLine: "г. Пятигорск, ул. Университетская, д. 34",
-    meters: ["cold_water", "electricity"],
+    meters: ["cold_water", "hot_water", "electricity"],
   },
   {
     slug: "universitetskaya-36a",

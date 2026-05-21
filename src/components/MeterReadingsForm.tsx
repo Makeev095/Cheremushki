@@ -3,17 +3,9 @@
 import { useState } from "react";
 import type { Building } from "@/data/buildings";
 import { METER_LABELS, type MeterId } from "@/data/meters";
+import { isWaterMeter, parseMeterReading } from "@/lib/meter-reading-parse";
 
 type Status = "idle" | "loading" | "success" | "error";
-
-function parseReading(raw: string): { ok: true; value: string } | { ok: false } {
-  const t = raw.trim().replace(",", ".");
-  if (t === "") return { ok: false };
-  const n = Number(t);
-  if (!Number.isFinite(n) || n < 0) return { ok: false };
-  if (n > 1_000_000_000) return { ok: false };
-  return { ok: true, value: t };
-}
 
 export function MeterReadingsForm({ building }: { building: Building }) {
   const [apartment, setApartment] = useState("");
@@ -36,10 +28,14 @@ export function MeterReadingsForm({ building }: { building: Building }) {
 
     const readings: Partial<Record<MeterId, string>> = {};
     for (const id of building.meters) {
-      const parsed = parseReading(values[id] ?? "");
+      const parsed = parseMeterReading(values[id] ?? "", id);
       if (!parsed.ok) {
         setStatus("error");
-        setMessage(`Проверьте показания: «${METER_LABELS[id]}». Нужно неотрицательное число.`);
+        setMessage(
+          isWaterMeter(id)
+            ? `Проверьте показания: «${METER_LABELS[id]}». Поле не должно быть пустым.`
+            : `Проверьте показания: «${METER_LABELS[id]}». Нужно неотрицательное число.`,
+        );
         return;
       }
       readings[id] = parsed.value;
@@ -134,7 +130,8 @@ export function MeterReadingsForm({ building }: { building: Building }) {
             <input
               id={id}
               name={id}
-              inputMode="decimal"
+              type="text"
+              inputMode={isWaterMeter(id) ? "text" : "decimal"}
               autoComplete="off"
               value={values[id] ?? ""}
               onChange={(e) =>
