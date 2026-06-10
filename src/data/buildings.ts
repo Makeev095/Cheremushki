@@ -142,8 +142,8 @@ export const BUILDINGS: Building[] = [
   },
   {
     slug: "tolyatti-36-1",
-    title: "Тольятти, 36/1",
-    addressLine: "г. Пятигорск, ул. Тольятти, д. 36, корп. 1",
+    title: "Тольятти 36/1",
+    addressLine: "г. Пятигорск, ул. Тольятти 36/1",
     meters: ["gas"],
   },
 ];
