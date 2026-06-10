@@ -140,6 +140,12 @@ export const BUILDINGS: Building[] = [
     addressLine: "г. Пятигорск, ул. 295 Стрелковой Дивизии, д. 19, корпус 5",
     meters: ["cold_water", "electricity"],
   },
+  {
+    slug: "tolyatti-36-1",
+    title: "Тольятти, 36/1",
+    addressLine: "г. Пятигорск, ул. Тольятти, д. 36, корп. 1",
+    meters: ["gas"],
+  },
 ];
 
 const bySlug = new Map(BUILDINGS.map((b) => [b.slug, b]));
